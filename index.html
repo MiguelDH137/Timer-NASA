@@ -1,10 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TIMER NASA</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="shortcut icon" href="./assets/nasa-logo.svg" type="image/x-icon">
 </head>
 <body>
     
@@ -12,26 +13,37 @@
         <h1>TIMER NASA</h1>
     </div>
 
-    <div id="container-timer-card">
-        <span id="timer-card-data">
-            <!-- Contenido inyectado por JS -->
-        </span>
-    </div>
+    <!-- Contenedor que pone la tarjeta y los inputs uno al lado del otro -->
+    <main id="main-timer-wrapper">
 
-    <div id="container-timer-input">
-        <label>Igresa la cantidad de segundos</label>
-        <input type="number" id="second-input" placeholder="Segundos">
+        <!-- Lado izquierdo: Pantalla del temporizador / GIF -->
+        <div id="container-timer-card">
+            <span id="timer-card-data">
+                00 : 00 : 00
+            </span>
+        </div>
 
-        <label>Igresa la cantidad de Minutos</label>
-        <input type="number" id="minute-input" placeholder="Minutos">
+        <!-- Lado derecho: Entradas de tiempo -->
+        <div id="container-timer-input">
+            <label for="hour-input">Ingresa las Horas</label>
+            <input type="number" id="hour-input" placeholder="Horas" min="0">
 
-        <label>Igresa la cantidad de segundos</label>
-        <input type="number" id="hour-input" placeholder="Horas">
-    </div>
+            <label for="minute-input">Ingresa los Minutos</label>
+            <input type="number" id="minute-input" placeholder="Minutos" min="0">
+
+            <label for="second-input">Ingresa los Segundos</label>
+            <input type="number" id="second-input" placeholder="Segundos" min="0">
+        </div>
+
+    </main>
 
     <div id="container-timer-button">
         <button id="timer-button">START</button>
     </div>
+
+    <footer>
+        <a href="https://github.com/MiguelDH137" target="_blank">Desarrollado por MiguelDH137</a>
+    </footer>
 
     <script src="./scripts.js"></script>
 </body>

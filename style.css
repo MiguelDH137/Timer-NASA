@@ -1,14 +1,156 @@
+* {
+    box-sizing: border-box;
+}
+
 body {
     display: flex;
     flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    background-image: url(./assets/background-space.webp);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    color: white;
+    font-family: 'Times New Roman', Times, serif;
+    min-height: 100vh;
+    margin: 0;
+    padding: 20px;
 }
 
 #container-timer-title {
     display: flex;
     justify-content: center;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
 }
 
+/* Envoltorio para colocar ambos contenedores lado a lado */
+#main-timer-wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: stretch; /* Ambos conservan la misma altura */
+    gap: 20px;
+    width: 100%;
+    max-width: 720px;
+}
+
+/* Propiedades comunes para que ambos tengan exactamente el mismo tamaño y estilo */
+#container-timer-card,
+#container-timer-input {
+    flex: 1;                /* Ambos ocupan el 50% del espacio del wrapper */
+    min-height: 250px;       /* Altura uniforme */
+    padding: 20px;
+    border: 2px solid #ffffff;
+    border-radius: 16px;
+    background-color: rgba(0, 0, 0, 0.658);
+}
+
+/* Ajustes específicos de la tarjeta con números / GIF */
+#container-timer-card {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+#timer-card-data {
+    font-size: 2.2rem;
+    font-weight: bold;
+    letter-spacing: 2px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+
+/* GIF ajustado para no desbordar la tarjeta */
+#gif-despegue {
+    max-width: 100%;
+    max-height: 200px;
+    object-fit: contain;
+    border-radius: 10px;
+    display: block;
+}
+
+/* Ajustes específicos de los inputs */
 #container-timer-input {
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    gap: 10px;
+}
+
+#container-timer-input label {
+    font-weight: bold;
+    font-size: 0.95rem;
+}
+
+#container-timer-input input {
+    padding: 8px;
+    border-radius: 12px;
+    border: 2px solid #ffffff;
+    text-align: center;
+    font-size: 1rem;
+    background-color: rgba(255, 255, 255, 0.95);
+    color: #000;
+}
+
+/* Botón Start */
+#timer-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    border-radius: 50%;
+    height: 75px;
+    width: 75px;
+    background-color: #d30101;
+    color: white;
+    font-weight: bold;
+    font-size: 1.1rem;
+    border: 2px solid #ffffff;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+#timer-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgb(255, 255, 255);
+}
+
+/* Pie de página */
+footer {
+    width: 100%;
+    max-width: 720px;
+    padding: 15px 0;
+    margin-top: 15px;
+    text-align: center;
+    color: white;
+    border: 2px solid #ffffff;
+    border-radius: 16px;
+    background-color: rgba(0, 0, 0, 0.658);
+}
+
+footer a {
+    text-decoration: none;
+    color: #f3f3f3;
+    font-weight: bold;
+}
+
+/* Adaptabilidad para pantallas pequeñas (móviles) */
+@media (max-width: 650px) {
+    #main-timer-wrapper {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    #container-timer-card,
+    #container-timer-input {
+        width: 90%;
+        min-height: 200px;
+    }
 }
