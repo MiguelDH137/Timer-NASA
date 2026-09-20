@@ -1,0 +1,14 @@
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+#container-timer-title {
+    display: flex;
+    justify-content: center;
+}
+
+#container-timer-input {
+    display: flex;
+    flex-direction: column;
+}
