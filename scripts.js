@@ -4,6 +4,7 @@ const secondInput = document.querySelector('#second-input');
 const minuteInput = document.querySelector('#minute-input');
 const hourInput = document.querySelector('#hour-input');
 const timerButton = document.querySelector('#timer-button');
+const reloadButton = document.querySelector('#reload-button')
 
 // ========== event listener ========== //
 timerButton.addEventListener('click', () => {
@@ -24,4 +25,8 @@ timerButton.addEventListener('click', () => {
         }
     }, 1000);
 
+});
+
+reloadButton.addEventListener('click', () => {
+    location.reload()
 });
