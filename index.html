@@ -24,23 +24,24 @@
         </div>
 
         <!-- Lado derecho: Entradas de tiempo -->
-        <div id="container-timer-input">
+        <form id="container-timer-input">
             <label for="hour-input">Ingresa las Horas</label>
-            <input type="number" id="hour-input" placeholder="Horas" min="0">
+            <input type="number" min="0" id="hour-input" placeholder="Horas">
 
             <label for="minute-input">Ingresa los Minutos</label>
-            <input type="number" id="minute-input" placeholder="Minutos" min="0">
+            <input type="number" min="0" max="59" id="minute-input" placeholder="Minutos">
 
             <label for="second-input">Ingresa los Segundos</label>
-            <input type="number" id="second-input" placeholder="Segundos" min="0">
-        </div>
+            <input type="number" min="0" max="59" id="second-input"  placeholder="Segundos">
+            
+            <div id="container-timer-button">
+                <button type="submit" id="timer-button">START</button>
+                <button id="reload-button">↻</button>
+            </div>
+        </form>
 
     </main>
 
-    <div id="container-timer-button">
-        <button id="timer-button">START</button>
-        <button id="reload-button">↻</button>
-    </div>
 
     <footer>
         <a href="https://github.com/MiguelDH137" target="_blank">Desarrollado por MiguelDH137</a>

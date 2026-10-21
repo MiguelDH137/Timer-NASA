@@ -1,30 +1,80 @@
-// ========== Selectores ========== //
+// ========== VARIABLES GLOBALES ========== //
+// selectores
+const form = document.querySelector('#container-timer-input')
 const timerCardData = document.querySelector('#timer-card-data');
 const secondInput = document.querySelector('#second-input');
 const minuteInput = document.querySelector('#minute-input');
 const hourInput = document.querySelector('#hour-input');
 const timerButton = document.querySelector('#timer-button');
 const reloadButton = document.querySelector('#reload-button')
+// RegEx
+const REGEXHOUR = /^([0-9]|1[0-9]|2[0-4])$/;
+const REGEXSECMIN = /^([0-9]|[1-5][0-9])$/;
+// variables
+let intervaloId = null;
+let fechaObjetivo = null;
+
+// ========== FUNCIONES ========== //
+function actualizarTemporizador() {
+    const ahora = new Date();
+
+    // Diferencia de ms mediante resta de obj Date
+    const diferenciaMs = fechaObjetivo.getTime() - ahora.getTime();
+
+    // Validacion si la diferencia llega a "0"
+    if (diferenciaMs <= 0) {
+        clearInterval(intervaloId);
+        intervaloId = null;
+        timerCardData.innerHTML = `<img src='./assets/rocket.gif' id='gif-despegue'>`
+        return
+    }
+
+    // Convertir ms restantes a h, m y s
+    const totalS = Math.floor(diferenciaMs / 1000);
+    const horas = Math.floor(totalS / 3600);
+    const minutos = Math.floor((totalS % 3600) / 60);
+    const segundos = totalS % 60;
+
+    // formato de 2 digitos
+    const formato = [
+        String(horas).padStart(2, '0'),
+        String(minutos).padStart(2, '0'),
+        String(segundos).padStart(2, '0')
+    ].join(":");
+    timerCardData.textContent = formato;
+};
+
 
 // ========== event listener ========== //
-timerButton.addEventListener('click', () => {
-    let second = parseInt(secondInput.value) || 0;
-    let minute = parseInt(minuteInput.value) || 0;
-    let hour = parseInt(hourInput.value) || 0;
+form.addEventListener('submit', (e) => {
+    // Evita que la pagina se reinicie.
+    e.preventDefault();
+
+    // Se obtiene el valor de los inputs
+    let s = parseInt(secondInput.value) || 0;
+    let m = parseInt(minuteInput.value) || 0;
+    let h = parseInt(hourInput.value) || 0;
+
+    // conversion a ms
+    const totalMs = (h * 3600 + m * 60 + s) * 1000;
+
+    if (totalMs <= 0) {
+        timerCardData.innerHTML = `<p>El tiempo ingresado es invalido</p>`
+        return;
+    }
+
+    // Se establece el tiempo objetivo y se suma los milisegundos al tiempo actual.
+    const ahora = new Date();
+    fechaObjetivo = new Date(ahora.getTime() + totalMs);
+
+    // validacion redundante para limpiar el temporizador si ya hay uno corriendo
+    if (intervaloId) { clearInterval(intervaloId)};
     
-    const temporizador = setInterval(() => {
-        timerCardData.innerHTML = `${hour}:${minute}:${second}`
+    // Ejecutar primer actualizacion visual
+    actualizarTemporizador();
 
-        hour = (second == 0 && minute == 0 && hour > 0) ? hour - 1 : hour;
-        minute = (second !== 0) ? minute : (minute > 0) ? minute - 1 : 59;
-        second = (second > 0) ? second - 1 : 59
-
-        if (hour == 0 && minute == 0 && second == 0) {
-            clearInterval(temporizador)
-            timerCardData.innerHTML = `<img src='./assets/rocket.gif' id='gif-despegue'>`
-        }
-    }, 1000);
-
+    // Intervalo para validar la diferencia de ms cada 500ms
+    intervaloId = setInterval(actualizarTemporizador, 500);
 });
 
 reloadButton.addEventListener('click', () => {

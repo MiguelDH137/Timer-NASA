@@ -101,6 +101,7 @@ body {
 
 #container-timer-button {
     display: flex;
+    justify-content: center;
     gap: 30px;
 }
 
