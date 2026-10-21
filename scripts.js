@@ -13,6 +13,8 @@ const REGEXSECMIN = /^([0-9]|[1-5][0-9])$/;
 // variables
 let intervaloId = null;
 let fechaObjetivo = null;
+const sonidoAlarma = new Audio('./assets/alarma.mp3');
+sonidoAlarma.loop = true;
 
 // ========== FUNCIONES ========== //
 function actualizarTemporizador() {
@@ -26,6 +28,7 @@ function actualizarTemporizador() {
         clearInterval(intervaloId);
         intervaloId = null;
         timerCardData.innerHTML = `<img src='./assets/rocket.gif' id='gif-despegue'>`
+        activarAlarma();
         return
     }
 
@@ -44,6 +47,14 @@ function actualizarTemporizador() {
     timerCardData.textContent = formato;
 };
 
+function activarAlarma() {
+    sonidoAlarma.currentTime = 0;
+    sonidoAlarma.play().catch(error => {console.error(`Error al reproducir la alarma: ${error}`)})
+};
+
+function detenerAlarma() {
+    sonidoAlarma.pause();
+};
 
 // ========== event listener ========== //
 form.addEventListener('submit', (e) => {
