@@ -63,6 +63,12 @@ form.addEventListener('submit', (e) => {
         return;
     }
 
+    // Se valida si el tipo y monto es correcto con regex
+    if (!REGEXHOUR.test(h) || !REGEXSECMIN.test(m) || !REGEXSECMIN.test(s)) {
+        timerCardData.innerHTML = `<p>La Cantidad de tiempo ingresado es invalido</p>`
+        return;
+    }
+
     // Se establece el tiempo objetivo y se suma los milisegundos al tiempo actual.
     const ahora = new Date();
     fechaObjetivo = new Date(ahora.getTime() + totalMs);
